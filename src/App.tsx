@@ -1,22 +1,22 @@
-import React from 'react';
-import {Hello} from './pages/TestClass/classcom'
+import React, {Suspense, lazy} from 'react';
 import './App.css';
+import { Link, HashRouter, Route  } from 'react-router-dom'
 import { Provider} from 'mobx-react'
-import Demo from './pages/TestClass/mobdemo'
-import Demo2 from './pages/TestClass/demo2'
+import Layout from './layout/index'
 import stores from './store/index';
-import router from './router'
+import RouterConfig from './router'
+import zhCN from 'antd/es/locale/zh_CN';
+import { ConfigProvider } from 'antd';
+
 function App() {
   return (
     <div className="App">
-      <Provider {...stores}>
-      <header className="App-header">  
-      {router()}
-        {/* <Hello compiler='Typescript' framework='react' /> */}
-        {/* <Demo homeStore={stores.homeStore} amount={stores.homeStore.amount} />
-        <Demo2 detailStore={stores.detailStore} /> */}
-      </header>
-      </Provider>
+      <ConfigProvider locale={zhCN}>  
+        <Provider {...stores}>
+          {/* <Layout />   */}
+          <RouterConfig />
+        </Provider>
+      </ConfigProvider>
     </div>
   );
 }

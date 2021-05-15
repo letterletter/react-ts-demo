@@ -3,13 +3,18 @@ import { Menu, Dropdown, } from 'antd';
 import './header2.scss';
 import { CaretDownFilled, NotificationOutlined } from '@ant-design/icons'
 import { Link, withRouter } from 'react-router-dom';
-import logo from '../assets/logo1.png'
 import { createFromIconfontCN } from '@ant-design/icons';
 
 const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_2368147_82px5n552zr.js',
 });
-class Header extends Component {
+export interface HeaderInterface {
+  current: string,
+  visible: boolean,
+  count: number,
+  signinAskList: Object[]
+}
+class Header extends Component<{}, HeaderInterface> {
   state = {
     current: '',
     visible: false,
@@ -22,7 +27,7 @@ class Header extends Component {
   }
 
 
-  handleMenuClick = (e) => {
+  handleMenuClick = (e:any) => {
     console.log('click', e.key)
     if (e.key === '0') {
 
@@ -56,7 +61,7 @@ class Header extends Component {
     return (
       <div className="header1" >
         <div className="logo"  style={{ cursor: 'pointer', }} >
-          <img alt='' src={logo} width="44" height='44' style={{ marginLeft: '10px', marginRight: '10px' }} />
+          <img alt='' src={process.env.PUBLIC_URL+'logo1.png'} width="44" height='44' style={{ marginLeft: '10px', marginRight: '10px' }} />
           监测数据处理平台
         </div>
         <div className='header-middle'>
@@ -67,7 +72,7 @@ class Header extends Component {
               <div style={{ cursor: 'pointer', fontSize: '19px', verticalAlign: 'middle', }}>
                 {/* <IconFont type="icon-yonghu" style={{ fontSize: '36px', marginRight: '10px', verticalAlign: 'middle' }} /> */}
                 <Dropdown overlay={menu} arrow={true} trigger={['click']}>
-                  <span className='namespan'>{'ddd'}</span>
+                  <span className='namespan'>{'ddd'}<CaretDownFilled /></span>
                 </Dropdown>
               </div> : 
               <div>

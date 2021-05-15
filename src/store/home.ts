@@ -3,7 +3,7 @@ import { observable, computed, action } from "mobx";
 export default class OrderLine {
     @observable price = 0;
     @observable amount = 1;
-    @observable name = '薛新瑞'
+    @observable name = 'test'
     @action setName = (name: string) => {
         console.log('eee',name)
         this.name = name

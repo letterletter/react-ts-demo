@@ -1,19 +1,26 @@
-import React from 'react'
+import React, {Suspense, lazy} from 'react'
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import MobDemo from './pages/TestClass/demo2'
-import MobDemo2 from './pages/TestClass/mobdemo'
-import FuncDemo from './pages/funcCom/hookdemo'
-import Home from './layout/index'
-const Routes = () => (
-  <Router>
-    <Switch>
-      <Route path="/" exact component={() => <div>home</div>}></Route>
-      <Route path="/login"  exact component={MobDemo}></Route>
-      <Route path="/signin" exact component={MobDemo2}></Route>
-      <Route path='/functest' exact component={FuncDemo}></Route>
-      <Route path="/forgetpwd" component={() => <div>忘记密码</div>}></Route>
+import Layout from './layout/index'
 
-    </Switch>
+const FuncDemo = lazy(() => import('./pages/funcCom/hookdemo'))
+const MobXDemo = lazy(() => import('./pages/TestClass/mobdemo'))
+const Login = lazy(() => import('./pages/login'))
+export interface Props {
+  history: any
+}
+const Routes = () => (
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Route path="/" exact component={() => <div>Home</div>}></Route>
+        <Route path="/login" exact component={Login}></Route>
+        <Route path="/signin" exact component={() => <div>sign</div>}></Route>
+       <Switch>
+          <Layout>
+            <Route path="/funcdemo" exact component={FuncDemo}></Route>
+            <Route path='/mobxdemo' exact component={MobXDemo}></Route>
+          </Layout>
+       </Switch>
+     </Suspense>
   </Router>
 )
 

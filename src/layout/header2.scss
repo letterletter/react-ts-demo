@@ -1,0 +1,157 @@
+.ant-layout-header {
+  height: 64px;
+  padding: 0 !important;
+  line-height: 64px;
+}
+
+.ant-layout {
+    background-color: #ffffff;//#f0f2f5 => #f7f8fa
+}
+
+.header1 {
+  display: flex;
+  // background-color: rgb(250, 250, 250);
+  background-color: rgb(17, 57, 97);
+  .logo{
+      width:220px;
+      font-size: 18px;
+      color: white;
+  }
+  .header-middle {
+    flex: 1;
+    height: 100%;
+    // width: aut;
+    margin-top: 15px;
+    color: black;
+    .menusty {
+        line-height: 48px;
+    }
+    }
+  .header-right{
+      color: black;
+      // padding-right: 20px;
+      width: 150px;
+      min-width: 100px;
+  }
+}
+
+.header-user-con{
+  display: flex;
+  height: 64px;
+  overflow-x: hidden;
+  align-items: center;
+  justify-content: center;
+  .badgeticon {
+    font-size: 20px;
+    color: #1890ff;
+  }
+  .namespan{
+    color: white;
+    width: 100px;
+    // display: inline-block;
+    // line-height: 64px;
+    margin-right: 5px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+
+.topmenu {
+    height: 38px;
+    border-top: 1px solid rgb(189, 186, 186);
+    .ant-menu-horizontal {
+      line-height: 36px;
+      white-space: nowrap;
+      border: 0;
+      border-bottom: 1px solid #f0f0f0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+
+}
+
+.header-callapse { //收缩按钮
+    height: 32px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    border-bottom: 1px solid grey;
+    background-color: rgba(183, 191, 204, 0.28);  //rgb(17, 57, 97)
+}
+.ant-menu-dark .ant-menu-inline.ant-menu-sub{
+  background: transparent !important;
+}
+
+.ant-menu-sub .ant-menu-inline {//展开的二级menu的背景
+  padding: 0;
+  background: rgba(210, 213, 218, 0.28) !important;
+  border: 0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.ant-menu-item-selected{
+  // background-color:#1890ff !important;
+  background-color:#d9e3f8 !important;
+  color: #4b7efe;
+  // rgba(183, 191, 204, 0.28)
+}
+
+.card-main{
+  background-color: #f7f8fa ;
+  position: relative;
+  overflow-y:auto;
+}
+
+
+.fixedside {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  color:gray;
+}
+.fixedside a {
+  color: rgb(144, 141, 141);
+}
+.fixsideitem {
+  width: 70px;
+  height: 90px;
+  position: relative;
+  margin-bottom: 20px;
+  cursor: pointer;
+  box-sizing: content-box;
+}
+.fixedside a:hover{
+  color: #fff;
+}
+.fixedside div:first-child{
+  margin-top: 20px;
+}
+.sideicon {
+  font-size: 28px;
+  color: rgb(144, 141, 141) !important;
+  background-color: transparent  !important;;
+}
+.sideicon:hover {
+  color: #fff !important;
+}
+
+.fixitm-active {
+  color: #fff !important;
+}
+
+.fixitm-active a {
+  color:#fff;
+}
+.fixitm-active .sideicon {
+  font-size: 28px;
+  color: #fff !important;
+  background-color: transparent  !important;;
+}
+.ddd {
+  color: rgba(201, 194, 194, 0.864);
+}
+
+//bicard background-color: #f7f8fa;
