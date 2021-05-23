@@ -19,7 +19,7 @@ class Home extends Component<IProps> {
         // const { homeStore } = this.props;
         console.log(this.props)
         const {setName, incre}=this.props.homeStore
-        setName("Bob666")
+        setName("Bob666"+Math.random().toFixed(3))
         incre()
     }
     componentDidMount() {
@@ -38,18 +38,17 @@ class Home extends Component<IProps> {
         return (
             <div className="home">
                 <h1 className='home-item'>Home</h1>
-                {/* <Observer>
+                <Observer>
                     {
                         () => <div>
                         <h2>{this.props.homeStore.name} --- {this.props.homeStore.amount}</h2>
                         <h2>{this.props.homeStore.total} </h2>
                     </div>
                     }
-                </Observer> */}
+                </Observer>
                 <div>
                         <h2>{this.props.homeStore.name} --- {this.props.homeStore.amount}</h2>
                         <h2>{homeStore.total} </h2>
-                        {this.props.amount}
                 </div>
                 {/* <Link to='/detail'>详情</Link>
                 <Link to='/login'>登录</Link> */}
