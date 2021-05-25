@@ -1,0 +1,33 @@
+.table-c {
+  width: 970px;
+  margin: 0 auto;
+  border: 1px solid greenyellow;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  min-height: 900px;
+  caption {
+    padding-top: 0.75em;
+    padding-bottom: 0.3em;
+    color: rgba(0, 0, 0, 0.45);
+    text-align: center;
+    caption-side: top;
+}
+}
+
+.table-c table{
+  border-right:1px solid #F00;
+  border-bottom:1px solid #F00; 
+  width: 900px;
+} 
+.table-c table td{
+  border-left:1px solid #F00;
+  border-top:1px solid #F00;
+  border-right: 1px solid #F00;
+  border-bottom: 1px solid #F00;
+} 
+
+.table-c table th{
+  border-left:1px solid #F00;
+  border-top:1px solid #F00;
+} 

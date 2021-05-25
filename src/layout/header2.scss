@@ -80,24 +80,24 @@
     border-bottom: 1px solid grey;
     background-color: rgba(183, 191, 204, 0.28);  //rgb(17, 57, 97)
 }
-// .ant-menu-dark .ant-menu-inline.ant-menu-sub{
-//   background: transparent !important;
-// }
+.ant-menu-dark .ant-menu-inline.ant-menu-sub{
+  background: transparent !important;
+}
 
-// .ant-menu-sub .ant-menu-inline {//展开的二级menu的背景
-//   padding: 0;
-//   background: rgba(210, 213, 218, 0.28) !important;
-//   border: 0;
-//   border-radius: 0;
-//   -webkit-box-shadow: none;
-//   box-shadow: none;
-// }
-// .ant-menu-item-selected{
-//   // background-color:#1890ff !important;
-//   background-color:#d9e3f8 !important;
-//   color: #4b7efe;
-//   // rgba(183, 191, 204, 0.28)
-// }
+.ant-menu-sub .ant-menu-inline {//展开的二级menu的背景
+  padding: 0;
+  background: rgba(210, 213, 218, 0.28) !important;
+  border: 0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.ant-menu-item-selected{
+  // background-color:#1890ff !important;
+  background-color:#d9e3f8 !important;
+  color: #4b7efe;
+  // rgba(183, 191, 204, 0.28)
+}
 
 .card-main{
   background-color: #f7f8fa ;

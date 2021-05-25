@@ -61,7 +61,7 @@ class Header extends Component<{}, HeaderInterface> {
     return (
       <div className="header1" >
         <div className="logo"  style={{ cursor: 'pointer', }} >
-          <img alt='' src={logo} width="44" height='44' style={{ marginLeft: '10px', marginRight: '10px' }} />
+          <img alt='' src={process.env.PUBLIC_URL+'logo1.png'} width="44" height='44' style={{ marginLeft: '10px', marginRight: '10px' }} />
           监测数据处理平台
         </div>
         <div className='header-middle'>
