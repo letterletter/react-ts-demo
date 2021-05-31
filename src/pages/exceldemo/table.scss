@@ -1,0 +1,38 @@
+.table-container {
+  width: 100%;
+  overflow-y: auto;
+  _overflow: auto;
+  margin: 0 20px 1em;
+  background-color: white;
+}
+table {
+  border: 0;
+  border-collapse: collapse;
+}
+table td, table th {
+  border: 1px solid #999;
+  padding: .5em 1em;
+}
+/*对齐*/
+.table-time div {
+  text-align: center;
+  min-width: 104px;
+}
+
+.table-time, tr th {
+  background-color: #DBE5F1;
+}
+
+.div-ISelect {
+  background-color: #FBD4B4;
+}
+
+/*图例*/
+ul li {
+  list-style: none;
+  float: left;
+}
+
+.table-container td {
+  cursor: pointer;
+}
