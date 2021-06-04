@@ -10,6 +10,8 @@ const Login = lazy(() => import('./pages/login'))
 const FuncRouter = lazy(() => import('./pages/funcCom/funcrouter'))
 const TestJsplumb = lazy(() => import('./pages/jsplumb/chartdemo'))
 const AnimationJsplumb = lazy(() => import('./pages/jsplumb/animation'))
+const JsPlumbFlowChart = lazy(() => import('./pages/jsplumb/flowChart'))
+const JsPlumbDynamicAnchor = lazy(() => import('./pages/jsplumb/dynamicAnchor'))
 const FormDemo1 = lazy(() => import('./components/FormExample'))
 const ExcelDemo = lazy(() => import('./pages/exceldemo/demo1.jsx'))
 const ExcelDemo2 = lazy(() => import('./pages/exceldemo/demo2.jsx'))
@@ -32,6 +34,9 @@ const Routes = () => (
             <Route path='/mobxdemo' exact component={() => <MobXDemo  homeStore={stores.homeStore} amount={stores.homeStore.amount} />}></Route>
             <Route path='/jsplumbchart' exact component={TestJsplumb}></Route>
             <Route path='/jsplumbanimation' exact component={AnimationJsplumb}></Route>
+            <Route path='/dynamicanchor' exact component={JsPlumbDynamicAnchor}></Route>
+
+            <Route path='/flowchart' exact component={JsPlumbFlowChart}></Route>
             <Route path='/formdemo1' exact component={FormDemo1}></Route>
             <Route path='/exceldemo' exact component={ExcelDemo}></Route>
             <Route path='/exceldemo2' exact component={ExcelDemo2}></Route>
