@@ -24,7 +24,7 @@ export default class Test extends Component {
       hoverClass: 'dropHover',
       activeClass: 'dragActive'
   },
-  connector = [ "Bezier", { cssClass: "connectorClass", hoverClass: "connectorHoverClass" } ],
+  connector = [ "Bezier", { cssClass: "connectorClass", hoverClass: "connectorHoverClass" } ], //链接线的形状
   connectorStyle = {
       gradient: {stops: [
           [0, exampleColor],
@@ -43,15 +43,15 @@ export default class Test extends Component {
   endpoint = ["Dot", { cssClass: "endpointClass", radius: 10, hoverClass: "endpointHoverClass" } ],
   endpointStyle = { fill: exampleColor },
   anEndpoint = {
-      endpoint: endpoint,
-      paintStyle: endpointStyle,
-      hoverPaintStyle: { fill: "#449999" },
+      endpoint: endpoint,  //端点
+      paintStyle: endpointStyle,  //连线样式
+      hoverPaintStyle: { fill: "#449999" }, //鼠标经过连线时的样式
       isSource: true,
       isTarget: true,
       maxConnections: -1,
-      connector: connector,
-      connectorStyle: connectorStyle,
-      connectorHoverStyle: hoverStyle,
+      connector: connector, //链接线
+      connectorStyle: connectorStyle, //链接线样式
+      connectorHoverStyle: hoverStyle, //鼠标在链接线上样式
       connectorOverlays: overlays
   };
 
@@ -74,7 +74,7 @@ instance.batch(function () {
       },
       endpoints = {},
   // ask jsPlumb for a selector for the window class
-      divsWithWindowClass = jsPlumb.getSelector(".dynamic-demo .window");
+      divsWithWindowClass = jsPlumbIn.getSelector(".dynamic-demo .window");
 
   // add endpoints to all of these - one for source, and one for target, configured so they don't sit
   // on top of each other.
@@ -86,6 +86,7 @@ instance.batch(function () {
           instance.addEndpoint(id, anEndpoint, {anchor: targetAnchors})
       ];
   }
+  console.log('endpoints', endpoints)
   // then connect everything using the connections map declared above.
   for (var e in endpoints) {
       if (connections[e]) {
@@ -100,7 +101,9 @@ instance.batch(function () {
 
   // bind click listener; delete connections on click
   instance.bind("click", function (conn) {
-      instance.detach(conn);
+      console.log(endpoints, jsPlumbIn.getAllConnections())
+      console.log(jsPlumbIn.getManagedElements())
+    //   instance.deleteConnection(conn);
   });
 
   // bind beforeDetach interceptor: will be fired when the click handler above calls detach, and the user

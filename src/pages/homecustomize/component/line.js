@@ -6,7 +6,6 @@ import {
     TooltipComponent,
     GridComponent,
     LegendComponent,
-    ToolboxComponent,
     DataZoomComponent
 } from 'echarts/components';
 import {
@@ -20,7 +19,7 @@ class Line extends Component{
     renderLine = () => {
         const {basicConfig, dataConfig,type} = this.props;
         echarts.use(
-            [TitleComponent,LegendComponent, GridComponent, LineChart, CanvasRenderer, DataZoomComponent, TooltipComponent, ToolboxComponent]
+            [TitleComponent,LegendComponent, GridComponent, LineChart, CanvasRenderer, TooltipComponent, DataZoomComponent]
         );
         // console.log(basicConfig)
         var chartDom = document.getElementById(`${this.props.id}`);
@@ -52,7 +51,7 @@ class Line extends Component{
             },
             yAxis: {
                 type: 'value',
-                // name: basicConfig.yName
+                name: basicConfig.yName
             },
             dataZoom: [
                 {
@@ -89,6 +88,7 @@ class Line extends Component{
         ]
         };
         setTimeout(()=>{
+            console.log(this.props.id)
             option && this.myChart.setOption(option);
             this.myChart.resize({
                 width:document.getElementById(`${this.props.id}`).clientWidth   
@@ -104,8 +104,8 @@ class Line extends Component{
         this.renderLine();
     }
     componentDidMount(){
-        console.log('ddfff')
         this.renderLine();
+        console.log('dddline')
     }
     shouldComponentUpdate(nextProps, nextState) {  //减少不必要渲染
         // console.log(nextProps,
@@ -118,9 +118,7 @@ class Line extends Component{
     }
     
     render(){
-        return (<div style={{width:'100%',height:'400px',position:'relative'}} id={`${this.props.id}`} className='noDraggable'>
-            
-        </div>)
+        return (<div style={{width:'100%',height:'calc(100% - 30px)',position:'relative'}} id={`${this.props.id}`} className='noDraggable'></div>)
         
     }
 }

@@ -17,6 +17,10 @@ const ExcelDemo = lazy(() => import('./pages/exceldemo/demo1.jsx'))
 const ExcelDemo2 = lazy(() => import('./pages/exceldemo/demo2.jsx'))
 const TableDemo = lazy(() => import('./pages/exceldemo/table'))
 const GridDemo = lazy(() => import('./pages/testDrag/index2'))
+const Dustbin = lazy(() => import('./test/testDnd/index'))
+const JsPlumbWithDrag = lazy(() => import('./pages/jsplumb/Test/main'))
+
+const dndAnyDrag = lazy(() => import('./pages/dndExample/index'))
 export interface Props { 
   history: any
 }
@@ -42,6 +46,9 @@ const Routes = () => (
             <Route path='/exceldemo2' exact component={ExcelDemo2}></Route>
             <Route  path='/tabledemo' exact component={TableDemo}></Route>
             <Route path='/griddemo' exact component={GridDemo}></Route>
+            <Route path='/jsplumbmain' exact component={JsPlumbWithDrag}></Route>
+            <Route path='/dustbin' exact component={Dustbin}></Route>
+            <Route path='/dragany' exact component={dndAnyDrag}></Route>
           </Layout>
        </Switch>
      </Suspense>

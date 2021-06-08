@@ -1,0 +1,17 @@
+.headarea {
+  width: 800px;
+  height: 60px;
+  // background-color: rgb(7, 21, 51);
+  display: flex;
+  flex-direction: row;
+  .iconsty {
+    font-size: 30px;
+  }
+}
+
+.rightselect {
+  line-height: 60px;
+}
+.ant-tabs > .ant-tabs-nav, .ant-tabs > div > .ant-tabs-nav{
+  padding: 0;
+}
