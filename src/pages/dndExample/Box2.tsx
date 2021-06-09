@@ -9,6 +9,7 @@ const style: CSSProperties = {
   marginRight: '1.5rem',
   marginBottom: '1.5rem',
   float: 'left',
+  cursor: 'move',
 }
 
 export interface BoxProps {
@@ -42,7 +43,7 @@ export const Box: FC<BoxProps> = ({ title }) => {
           } else {
             alertMessage = `You cannot ${dropResult.dropEffect} an item into the ${dropResult.name}`
           }
-          alert(alertMessage)
+          // alert(alertMessage)
         }
       },
       collect: (monitor: DragSourceMonitor) => ({
@@ -53,7 +54,7 @@ export const Box: FC<BoxProps> = ({ title }) => {
   )
 
   return (
-    <div ref={drag} style={{ ...style, opacity }}>
+    <div className='box2' ref={drag} style={{ ...style, opacity }}>
       {title}
     </div>
   )

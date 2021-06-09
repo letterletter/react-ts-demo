@@ -1,6 +1,5 @@
 import { CSSProperties, FC, useCallback, useState } from 'react'
-import { useDrop } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
+
 import { Box } from './Box2'
 import { snapToGrid as doSnapToGrid } from './snapToGrid'
 import update from 'immutability-helper'

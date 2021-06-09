@@ -56,9 +56,17 @@ export const Container: FC<ContainerProps> = ({ snapToGrid }) => {
       accept: ItemTypes.BOX,
       drop(item: DragItem, monitor) {
         console.log('drop', item)
+        let itemNew = {id: '', title: ''}
         if(!item.id) {
-          item.id = azlist[index++]
-          addBox(item.id, 40+index*10, 100+index*15, item.title)
+          itemNew.id = azlist[index++]
+          itemNew.title = item.title
+          console.log(monitor.getInitialClientOffset(), monitor.getClientOffset(), monitor.getDifferenceFromInitialOffset())
+          const currentXY = monitor.getClientOffset() as {
+            x: number,
+            y: number
+          }
+          // item.id = azlist[index++]
+          addBox(itemNew.id, currentXY.x-200, currentXY.y+34, itemNew.title)
           console.log('index', index, boxes)
 
         }else {
