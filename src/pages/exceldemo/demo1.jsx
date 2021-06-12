@@ -4,6 +4,9 @@ import $ from 'jquery'
 import { Menu, Modal} from 'antd'
 import './table.scss'
 import Line from '../../components/echarts/line'
+import FuncLine from '../../components/echarts/funcLine.js'
+import FuncPolar from '../../components/echarts/funcPolar'
+import { formDataSet} from '../../utils/echartsUtls'
 import './style.scss'
 /**
  * https://www.cnblogs.com/liuxianan/p/js-excel.html
@@ -20,7 +23,7 @@ import './style.scss'
 function OutTable({ data, cols }) {
   return (
     <div className="table-responsive">
-      <table className="table table-striped" contentEditable>
+      <table className="table table-striped" contentEditable={true}>
         <thead>
           <tr>{cols.map((c) => <th key={c.key}>{c.name}</th>)}</tr>
         </thead>
@@ -53,6 +56,7 @@ export default class Test extends Component {
     filenames: '',
     rightLineType: '',
     addVisible: false, //创建图
+    lineDataSetSeries: null,
   }
   componentDidMount() {
     document.oncontextmenu = function name(e) {
@@ -61,7 +65,7 @@ export default class Test extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevState.data, this.state.data)
+    // console.log(prevState.data, this.state.data)
     if(prevState.data !== this.state.data) {
       console.log('ee')
       this.initForm()
@@ -91,7 +95,7 @@ export default class Test extends Component {
         files: files,
         filenames: [].slice.call(files).map(item => item.name + ' -- ')
       })
-      console.log(htmldata)
+      // console.log(htmldata)
     }
 
     if (rABS) reader.readAsBinaryString(file); else reader.readAsArrayBuffer(file);
@@ -158,31 +162,44 @@ export default class Test extends Component {
   }
   handleMenuClick = ({item, key, keyPath, domEvent }) => {
     console.log('key, key', key)
+    let xdata = this.state.cols.slice(firstindexcol,  curindexcol+1)
+    let ydatas = this.getSelectCon()
+    console.log(xdata, this.getSelectCon(), ws)
+    // console.log(formDataSet(xdata, ydatas))
     this.setState({
+      lineDataSetSeries: formDataSet(xdata, ydatas),
       rightLineType: key,
       addVisible: true
     })
-    let xdata = this.state.cols.slice(firstindexcol,  curindexcol+1)
-    console.log(xdata, this.getSelectCon())
-
     this.root.style.display='none'
   }
-  getSelectCon() {
+  getSelectCon =() =>  {
     var minrow = curindexrow > firstindexrow ? firstindexrow : curindexrow;
     var mincol = curindexcol > firstindexcol ? firstindexcol : curindexcol;
     var maxrow = curindexrow > firstindexrow ? curindexrow : firstindexrow;
     var maxcol = curindexcol > firstindexcol ? curindexcol : firstindexcol;
     let res = []
+    // for (var i = minrow; i <= maxrow; i++) {
+    //   let arr = []
+    //   for (var j = mincol; j <= maxcol; j++) {
+    //     $("tr:eq(" + i + ") td:eq(" + j + ")").addClass("div-ISelect");
+    //     arr.push($("tr:eq(" + i + ") td:eq(" + j + ")").text())
+    //   }
+    //   res.push(arr)
+    // }
+    const data = this.state.data
+    let resfromdata = []
     for (var i = minrow; i <= maxrow; i++) {
-      let arr = []
-      for (var j = mincol; j <= maxcol; j++) {
-        $("tr:eq(" + i + ") td:eq(" + j + ")").addClass("div-ISelect");
-        arr.push($("tr:eq(" + i + ") td:eq(" + j + ")").text())
-      }
-      res.push(arr)
+      let arr = data[i].slice(mincol, maxcol+1)
+      // for (var j = mincol; j <= maxcol; j++) {
+      //   $("tr:eq(" + i + ") td:eq(" + j + ")").addClass("div-ISelect");
+      //   arr.push($("tr:eq(" + i + ") td:eq(" + j + ")").text())
+        
+      // }
+      resfromdata.push(arr)
     }
-    return res
-    console.log(res)
+    console.log(resfromdata)
+    return resfromdata
   }
   handleHide = () => {
     this.root.style.display = 'none'
@@ -234,6 +251,7 @@ export default class Test extends Component {
         var mincol = curindexcol > firstindexcol ? firstindexcol : curindexcol;
         var maxrow = curindexrow > firstindexrow ? curindexrow : firstindexrow;
         var maxcol = curindexcol > firstindexcol ? curindexcol : firstindexcol;
+        console.log('mouseenter', curindexcol, curindexrow)
         for (var i = minrow; i <= maxrow; i++) {
           for (var j = mincol; j <= maxcol; j++) {
             $("tr:eq(" + i + ") td:eq(" + j + ")").addClass("div-ISelect");
@@ -242,134 +260,25 @@ export default class Test extends Component {
       }
     });
     $(document).mouseup(function () {
+      console.log('mouseup', curindexrow, curindexcol, firstindexrow, firstindexcol)
       isMouseDown = false;
     });
   }
   render() {
-    const { data, cols, files, filenames, rightLineType, addVisible } = this.state
-    console.log('files', files)
+    const { data, cols, files, filenames, rightLineType, addVisible, lineDataSetSeries } = this.state
+    // console.log('files', files)
     return (
       <div>
         <input type="file" files={files} id='fileupd' multiple
           accept=".xlsx, .xls, .csv" onChange={this.handleChange} />
         <div>ddd</div>
         <div>{filenames}  <button onClick={this.getSelectCon}>获取选中</button></div>
-
+        <FuncPolar id='funcdemo' />>
+        {/* <FuncLine id='funcdemo' /> */}
         <div>
         </div>
-        {/* <div className='table-c'>
-          <button onClick={this.readTable}>测试表格</button>
-        <table className='tablesty'   id="tablearea"  >
-                <caption>测试表单</caption>
-                <thead><tr>
-                  <th  id="title1">类别</th>
-                  <th  id="title2">时间范围</th>
-                  <th  id="title3" colSpan='3'>2020.09.03-2020.09.09</th>
-                  <th  id="title4" colSpan='2'>制表时间</th>
-                  <th  id="title5" colSpan='4'>2020.09.07</th>
-                  <th  id="title6">制表人</th>
-                  <th  id="title7" colSpan='2'>王杰</th>
-                  </tr>  
-                </thead>
-                <tbody>
-                  <tr >
-                      <td headers="title1" rowSpan='2'>事件统计</td>
-                      <td headers="title2">工作面</td>
-                      <td headers="title3">回采方式</td>
-                      <td headers="title4">进风尺寸</td>
-                      <td headers="title5">回风尺寸</td>
-                      <td headers="title1">&lt;10<sup>3</sup></td>
-                      <td headers="title2">10<sup>3</sup></td>
-                      <td headers="title3">10<sup>4</sup></td>
-                      <td headers="title4">10<sup>5</sup></td>
-                      <td headers="title5">&ge;10<sup>6</sup></td>
-                      <td headers="title1">事件数</td>
-                      <td headers="title2">内容2</td>
-                      <td headers="title3">内容3</td>
-                      <td headers="title4">备注</td>
-                    </tr>
-                    <tr >
-                      <td headers="title2">5105工作面</td>
-                      <td headers="title3">综放</td>
-                      <td headers="title4">127.4</td>
-                      <td headers="title5">133</td>
-                      <td headers="title1">370</td>
-                      <td headers="title2">23</td>
-                      <td headers="title3">0</td>
-                      <td headers="title5">0</td>
-                      <td headers="title1">0</td>
-                      <td headers="title2">393</td>
-                      <td headers="title3">2.02E+05</td>
-                      <td headers="title4">4013</td>
-                      <td headers="title4"></td>
-                    </tr>
-                    <tr  >
-                      <td rowSpan='6' colSpan='1' >活动趋势</td>
-                      <td colSpan='13' rowSpan='6'>
-                          dfdfd
-                        </td>
-                    </tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr>
-                      <td rowSpan='2'>密度云图</td>
-                      <td  style={{height: '300px'}}>
-                        剖面
-                      </td>
-                      <td  colSpan='12'>
-                      </td>
-                    </tr>
-                    <tr >
-                      <td style={{height: '300px'}}>
-                        平面
-                      </td>
-                      <td colSpan='12'>
-                        dd
-                      </td>
-                    </tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr >
-                      <td rowSpan='3' style={{height: '60px'}}>监测分析</td>
-                      <td  rowSpan='3' colSpan='13'>re</td>
-                    </tr>
-                    <tr></tr><tr></tr>
-                    <tr >
-                      <td rowSpan='4' style={{height: '50px'}} >防治措施</td>
-                      <td rowSpan='4' colSpan='13' >re</td>
-                    </tr>
-                    <tr></tr><tr></tr><tr></tr>
-                    <tr>
-                      <td rowSpan='2' style={{height: '50px'}}>建议</td>
-                      <td rowSpan='2' colSpan='13'></td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                      <td>签批</td>
-                      <td colSpan='2'>分析员</td>
-                      <td colSpan='2'></td>
-                      <td colSpan='2'>地测科长</td>
-                      <td colSpan='2'></td>
-                      <td colSpan='2'>地测副总</td>
-                      <td colSpan='3'></td>
-                    </tr>
-                </tbody>
-              </table>
-        </div> */}
         <div className="row">
-          <div className="col-xs-12">
+          <div className="col-xs-12" contentEditable>
             <OutTable data={data} cols={cols} />
           </div>
         </div>
@@ -389,8 +298,9 @@ export default class Test extends Component {
             </Menu.Item>
           </Menu>
         </div>
-        <Modal visible={addVisible} onCancel={e => this.setState({ addVisible: false})}>
+        <Modal visible={addVisible} onCancel={e => this.setState({ addVisible: false})} destroyOnClose>
         {addVisible  && <Line id='333' basicConfig={{legendOrient:'vertical', lineStyle: true, lineType: 'solid',lineColor: 'blue', showArea: false }} 
+          DsetAndSeries={lineDataSetSeries}
             dataConfig = {{xname: ['a', 'b', 'c']}}
           />
       }
